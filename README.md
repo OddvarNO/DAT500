@@ -9,4 +9,4 @@ Kun ein alder![image](https://user-images.githubusercontent.com/54265658/1534077
 
 https://data.ssb.no/api/v0/dataset/1054?lang=no
 
-https://data.ssb.no/api/v0/dataset/85452?lang=no![image]  (https://user-images.githubusercontent.com/54265658/153407722-6c723c0d-719a-4f36-8390-5b85aae41385.png)
+https://data.ssb.no/api/v0/dataset/85452?lang=no
