@@ -1,0 +1,54 @@
+# to run mapReduce, must be in correct directory. WARC
+python3 count_sum.py --hadoop-streaming-jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.0.jar -r hadoop hdfs:///crawl-data/warc/CC-MAIN-20220116093137-20220116123137-00000.warc --output-dir hdfs:///crawl-data/output0 --no-output --setup 'pip install -r ~/requirements.txt#'
+
+# WET file 
+python3 translate.py --hadoop-streaming-jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.0.jar -r hadoop hdfs:///crawl-data/wet/wet.txt --output-dir hdfs:///crawl-data/output0 --no-output --setup 'pip install -r ~/requirements.txt#'
+
+# To view outputfile:q
+hadoop fs -text /crawl-data/output0/part* | less
+
+# start and stop hadoop.
+start-dfs.sh
+start-yarn.sh
+hadoop fs -ls /
+
+# Delete the output file:
+hadoop fs -rm -r /crawl-data/output69
+
+# Install a module with pip:
+pip3 install <module>
+
+# Put files to hdfs
+hadoop fs -put from_location to_location
+
+# running inline
+python3 html_tag_remover.py -r inline warc.txt
+
+#  Running tag_remover
+python3 html_tag_remover.py --hadoop-streaming-jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.0.jar -r hadoop hdfs:///crawl-data/warc/CC-MAIN-20220116093137-20220116123137-00000.warc --output-dir hdfs:///crawl-data/output0 --no-output
+
+# On all nodes, to install spark and pyspark (Has been done), Then update Environment variables.
+wget https://dlcdn.apache.org/spark/spark-3.2.1/spark-3.2.1-bin-hadoop3.2.tgz
+tar -xvzf spark-3.2.1-bin-hadoop3.2.tgz
+sudo mv spark-3.2.1-bin-hadoop3.2 /usr/local/spark
+pip install pyspark
+# Set and update environment variables.
+sudo tee /etc/environment > /dev/null << EOL
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/hadoop/bin:/usr/local/hadoop/sbin:usr/local/spark/bin"
+JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+HADOOP_HOME="/usr/local/hadoop"
+SPARK_HOME="/usr/local/spark"
+EOL
+source /etc/environment
+
+# Installing all requirements for profanity filter
+# as per https://towardsdatascience.com/build-your-language-filter-with-python-d6502f9c224b
+sudo pip install profanity-filter
+sudo python3 -m spacy download en
+
+# Run script with timing
+time ./run.sh
+
+# La ting kjøre i background, kan gå ut med ctrl+a+d eller drepe med ctrl+D (-r reconnect, -S start)
+screen -S navnet
+# har to screens kjørende (hadoop og preprocessing/1/2)

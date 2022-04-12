@@ -1,0 +1,7 @@
+youtube.com         facebook.com
+google.com         facebook.com
+yahoo.com         facebook.com
+twitter.com         facebook.com
+google.com         facebook.com
+yahoo.com         facebook.com
+facebook.com         twitter.com
