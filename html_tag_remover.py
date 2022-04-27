@@ -1,4 +1,6 @@
 from mrjob.job import MRJob
+import warc
+import gzip
 
 class MRRemoveHTMLTag(MRJob):
     def mapper_init(self):
@@ -7,6 +9,10 @@ class MRRemoveHTMLTag(MRJob):
         self.body = []
     
     def mapper(self, _, line):
+        # file = warc.WARCFile('cc-mrjob/crawl-data/CC-MAIN-2022-05/segments/1642320299852.23/warc/test_warc_file.txt')
+        # for _, record in enumerate(file):
+        #     yield(record)
+
         line = line.strip()
         if line.find('WARC-Target-URI: ') == 0:
             self.websiteAnServer.append(line[17:len(line)-1])

@@ -52,3 +52,6 @@ time ./run.sh
 # La ting kjøre i background, kan gå ut med ctrl+a+d eller drepe med ctrl+D (-r reconnect, -S start)
 screen -S navnet
 # har to screens kjørende (hadoop og preprocessing/1/2)
+
+# sjekke loggene
+cd /usr/local/hadoop/logs/userlogs; ls
